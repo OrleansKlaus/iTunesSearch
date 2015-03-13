@@ -30,13 +30,14 @@ static bool isFirstAccess = YES;
 }
 
 
-- (NSArray *)buscarMidias:(NSString *)termo {
+- (NSArray *)buscarMidias:(NSString *)termo andMedia: (NSString *)media { {
     if (!termo) {
         termo = @"";
     }
     
     @try {
-        NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=movie", termo];
+        NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=%@", termo, media];
+
         NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
         
         NSError *error;
@@ -82,6 +83,7 @@ static bool isFirstAccess = YES;
             
             return nil;
         }
+    }
 }
 
 #pragma mark - Life Cycle

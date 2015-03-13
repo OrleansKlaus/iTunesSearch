@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSString *genero;
 @property (nonatomic, strong) NSString *pais;
 @property (nonatomic, strong) NSString *lancamento;
+@property (nonatomic,strong) NSString *midia;
 
 @end
