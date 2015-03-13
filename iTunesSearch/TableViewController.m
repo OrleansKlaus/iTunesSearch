@@ -18,7 +18,11 @@
 @end
 
 @implementation TableViewController
+{
+    iTunesManager *itunes;
+}
 
+@synthesize header, pesquisaTermo;
 
 
 - (void)viewDidLoad {
@@ -27,11 +31,15 @@
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
-    iTunesManager *itunes = [iTunesManager sharedInstance];
-    midias = [itunes buscarMidias:@"Apple"];
-    
+    itunes = [iTunesManager sharedInstance];
+
 #warning Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
-    self.tableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 15.f)];
+    
+    header = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 80)];
+    pesquisaTermo.translucent = YES;
+    [pesquisaTermo resignFirstResponder];
+    
+    self.pesquisaTermo.placeholder = NSLocalizedString(@"Buscar",nil);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +64,11 @@
     
     [celula.nome setText:filme.nome];
     [celula.tipo setText:@"Filme"];
+    [celula.autor setText:filme.artista];
+    [celula.genero setText:filme.genero];
+    [celula.duracao setText:[NSString stringWithFormat:@"%d min",[filme.duracao intValue]/6000]];
+    [celula.pais setText:filme.pais];
+    [celula.lancamento setText:filme.lancamento];
     
     return celula;
 }
@@ -64,5 +77,14 @@
     return 70;
 }
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar = pesquisaTermo;
+    NSString *termo = [[NSString alloc] init];
+    termo = searchBar.text;
+    midias = [itunes buscarMidias:termo];
+    [searchBar endEditing:YES];
+    [self.tableview reloadData];
+}
 
 @end
