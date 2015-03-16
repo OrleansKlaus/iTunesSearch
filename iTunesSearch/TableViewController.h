@@ -12,9 +12,10 @@
 
 
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
-// Adicionado por Orleans
+// Orleans: Implementado a pesquisa pelo usuario
 @property (weak, nonatomic) IBOutlet UISearchBar *pesquisaTermo;
 @property (strong, nonatomic) IBOutlet UIView *header;
+@property  NSUserDefaults *userDefaults;
 
 @end
 

@@ -10,6 +10,7 @@
 
 #warning Classe importada para uso no metodo de inicilizacao da App
 #import "TableViewController.h"
+#import "Detalhe.h"
 
 @interface AppDelegate ()
 
@@ -30,6 +31,12 @@
     TableViewController *tvc = [[TableViewController alloc] init];
     [self.window setRootViewController:tvc];
     [self.window makeKeyAndVisible];
+    
+// Orleans: Implementado o Navigation com detalhe do termo pesquisado
+//    self.navigation = [[UINavigationController alloc]initWithRootViewController:[[Detalhe alloc]initWithNibName:@"Detalhe" bundle:nil]];
+//    [self.window makeKeyAndVisible];
+//    self.window.rootViewController = self.navigation;
+    
     return YES;
 }
 
