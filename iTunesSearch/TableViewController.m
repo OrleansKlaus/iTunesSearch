@@ -88,30 +88,47 @@
     return i;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString *sectionName;
+    UIView *headerView = [[UIView alloc] init];
+    [headerView setFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 4, tableView.frame.size.width, 18)];
+    [headerLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [headerView setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]];
+    UIImage *imagem;
 
     switch (section)
     {
         case 0:
-            sectionName = @"Podcasts";
-            break;
+             sectionName = @"Podcasts";
+             [headerLabel setText:sectionName];
+             imagem = [UIImage imageNamed:sectionName];
+             break;
         case 1:
-            sectionName = @"Filmes";
+             sectionName = @"Filmes";
+             [headerLabel setText:sectionName];
+             imagem = [UIImage imageNamed:sectionName];
              break;
         case 2:
              sectionName = @"Musicas";
+             [headerLabel setText:sectionName];
+             imagem = [UIImage imageNamed:sectionName];
              break;
         case 3:
-            sectionName = @"Ebooks";
-            break;
+             sectionName = @"Ebooks";
+             [headerLabel setText:sectionName];
+             imagem = [UIImage imageNamed:sectionName];
+             break;
         default:
              sectionName = @"";
              break;
     }
     
-    return sectionName;
+    UIImageView *headerImage = [[UIImageView alloc] initWithImage:imagem];
+    headerImage.frame = CGRectMake(0, 2, 20, 20);
+    [headerView addSubview:headerImage];
+    return headerView;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
